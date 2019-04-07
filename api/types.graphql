@@ -1,0 +1,38 @@
+type User @model {
+  # Required system field:
+  #read-only (managed by Graphcool)
+  id: ID! @isUnique
+
+  # Optional system fields (remove if not needed):
+  # read-only (managed by Graphcool)
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  # User Fields
+  name: String!
+  website: String
+  email: String @isUnique
+  password: String
+
+  # Email verification
+  accountActivationCode: AccountActivationCode
+    @relation(name: "AccountActivationCodeOnUser")
+  accountActivated: Boolean @defaultValue(value: false)
+
+  # Reset Password
+  resetPassword: PasswordResetCode @relation(name: "PasswordResetCodeOnUser")
+}
+
+# Account Activation
+type AccountActivationCode @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  user: User @relation(name: "AccountActivationCodeOnUser")
+}
+
+# Reset Password
+type PasswordResetCode @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  user: User @relation(name: "PasswordResetCodeOnUser")
+}

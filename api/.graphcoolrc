@@ -1,0 +1,4 @@
+targets:
+  default: dev
+  prod: shared-eu-west-1/cjm3hg1z613zf0145ihl5hnj7
+  dev: local/cjmg61iqk000401135t2vd7s7

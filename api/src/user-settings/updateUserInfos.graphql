@@ -1,0 +1,12 @@
+type UpdateUserInfosPayload {
+  name: String!
+}
+
+extend type Mutation {
+  updateUserInfos(
+    token: String!
+    newName: String!
+    oldPassword: String
+    newPassword: String
+  ): UpdateUserInfosPayload
+}

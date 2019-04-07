@@ -1,0 +1,11 @@
+type SendAccountActivationEmailPayload {
+  result: Boolean!
+}
+
+extend type Mutation {
+  sendAccountActivationEmail(
+    id: ID!
+    name: String!
+    email: String!
+  ): SendAccountActivationEmailPayload
+}

@@ -1,0 +1,143 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+}
+
+.Nav {
+  background: #000;
+  text-align: center;
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      a {
+        display: inline-block;
+        padding: 15px;
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+          background: rgb(107, 107, 107);
+        }
+      }
+    }
+  }
+}
+
+main {
+  width: 300px;
+  margin: auto;
+  margin-top: 22px;
+  background: #fff;
+  border: 1px solid rgb(228, 228, 228);
+  border-radius: 5px;
+
+  h1 {
+    padding: 20px 0;
+    margin: 0;
+    text-align: center;
+    font-size: 20px;
+    background: #d4d4d4;
+  }
+}
+
+.authForm {
+  padding: 20px;
+
+  form > div {
+    margin-bottom: 15px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 14px;
+  }
+
+  .Input {
+    &.Input-Text {
+      min-width: 240px;
+      min-height: 20px;
+      padding: 6px 8px;
+      font-size: 13px;
+      line-height: 20px;
+      color: #24292e;
+      vertical-align: middle;
+      background-color: #f3f3f3;
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      border: 1px solid #d1d5da;
+      border-radius: 3px;
+      outline: none;
+      box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075);
+
+      &:focus {
+        background-color: #fff;
+        outline: none;
+      }
+
+      &.Input-Text--disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  small {
+    display: inline-block;
+    margin-top: 7px;
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+  .Btn {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    padding: 13px 12px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-repeat: repeat-x;
+    background-position: -1px -1px;
+    background-size: 110% 110%;
+    border: 1px solid rgba(27, 31, 35, 0.2);
+    border-radius: 0.25em;
+    appearance: none;
+
+    &.Btn--primary {
+      background: #0090ff;
+      color: #fff;
+
+      &:disabled {
+        opacity: 0.3;
+      }
+    }
+  }
+}
+
+.Alert {
+  padding: 7px;
+  text-align: center;
+  font-size: 13px;
+
+  &.Alert--error {
+    background: #ffbfbf;
+    color: #8e3333;
+    border: 1px solid #ec9191;
+  }
+
+  &.Alert--success {
+    background: #caffbf;
+    color: #368e33;
+    border: 1px solid #91eca5;
+  }
+}

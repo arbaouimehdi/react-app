@@ -1,0 +1,132 @@
+# Welcome to Graphcool!
+#
+# This file is the main config file for your Graphcool Service.
+# It's very minimal at this point and uses default values.
+# We've included a hello world function here.
+# Just run `graphcool deploy` to have the first running Graphcool Service.
+#
+# Check out some examples:
+#    github.com/graphcool/examples
+#
+# Here are the reference docs of this definition format:
+# https://docs-next.graph.cool/reference/basics/project-configuration-opheidaix3
+#
+# Happy Coding!
+
+# In the types.graphql you define your data schema
+types: ./types.graphql
+
+functions:
+  #
+  #
+  # email & password authentication:
+  signup:
+    type: resolver
+    schema: src/email-password/signup.graphql
+    handler:
+      code: src/email-password/signup.ts
+
+  authenticate:
+    type: resolver
+    schema: src/email-password/authenticate.graphql
+    handler:
+      code: src/email-password/authenticate.ts
+
+  loggedInUser:
+    type: resolver
+    schema: src/email-password/loggedInUser.graphql
+    handler:
+      code: src/email-password/loggedInUser.ts
+
+  #
+  #
+  # Email Verification
+  # Creates and sends uuid with url to user
+  sendAccountActivationEmail:
+    type: resolver
+    schema: src/email-verification/sendAccountActivationEmail.graphql
+    handler:
+      code:
+        src: src/email-verification/sendAccountActivationEmail.ts
+        environment:
+          MAILGUN_API_KEY: 0882213544ae6fa295d999b489755ac8-7bbbcb78-59fd80ce
+          MAILGUN_SUBDOMAIN: sandbox8a05d2181dc84b9c8764b6b9f414a98c.mailgun.org
+          ACCOUNT_ACTIVATION_URL: http://localhost:3000/activate-account
+
+  # handles verification of user's email using supplied verification code
+  activateAccount:
+    type: resolver
+    schema: src/email-verification/activateAccount.graphql
+    handler:
+      code: src/email-verification/activateAccount.ts
+
+  #
+  #
+  # Password Reset
+  #send reset password email
+  sendPasswordResetEmail:
+    type: resolver
+    schema: src/reset-password/sendPasswordResetEmail.graphql
+    handler:
+      code:
+        src: src/reset-password/sendPasswordResetEmail.ts
+        environment:
+          MAILGUN_API_KEY: 0882213544ae6fa295d999b489755ac8-7bbbcb78-59fd80ce
+          MAILGUN_SUBDOMAIN: sandbox8a05d2181dc84b9c8764b6b9f414a98c.mailgun.org
+          PASSWORD_RESET_URL: http://localhost:3000/reset-password-confirmation
+
+  # reset user password
+  resetPassword:
+    type: resolver
+    schema: src/reset-password/resetPassword.graphql
+    handler:
+      code:
+        src: src/reset-password/resetPassword.ts
+        environment:
+          MAILGUN_API_KEY: 0882213544ae6fa295d999b489755ac8-7bbbcb78-59fd80ce
+          MAILGUN_SUBDOMAIN: sandbox8a05d2181dc84b9c8764b6b9f414a98c.mailgun.org
+          LOGIN_URL: http://localhost:3000/change-password
+
+  # Update the User Infos
+  updateUserInfos:
+    type: resolver
+    schema: src/user-settings/updateUserInfos.graphql
+    handler:
+      code:
+        src: src/user-settings/updateUserInfos.ts
+
+# Model/Relation permissions are used to limit the API access
+# To take the burden of thinking about those while development, we
+# preconfigured the wildcard ("*") permission that allows everything
+# Read more here:
+# https://docs-next.graph.cool/reference/auth/authorization/overview-iegoo0heez
+permissions:
+  - operation: User.read
+    fields:
+      - id
+      - name
+      - email
+      - password
+      - accountActivated
+      - resetPassword
+
+  - operation: AccountActivationCode.read
+    fields:
+      - id
+
+  - operation: PasswordResetCode.read
+    fields:
+      - id
+
+  # Only authenticated users can update their infos
+  - operation: User.update
+    authenticated: true
+    fields:
+      - name
+      - password
+
+# Your root tokens used for functions to get full access to the API
+# Read more here:
+# https://www.graph.cool/docs/reference/auth/authentication/authentication-tokens-eip7ahqu5o
+rootTokens:
+  - mytoken
