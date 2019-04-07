@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { withApollo } from "react-apollo";
 
-class Navigation extends React.Component {
+class Nav extends React.Component {
   render() {
     return (
       <nav className="Nav">
@@ -43,4 +43,4 @@ class Navigation extends React.Component {
   }
 }
 
-export default withApollo(Navigation);
+export default withApollo(Nav);
